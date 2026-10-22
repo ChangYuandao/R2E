@@ -1,0 +1,22 @@
+Important constraints for TorchScript compatibility:
+- The reward function will be decorated with @torch.jit.script, so all code must be fully TorchScript-compatible.
+- Use torch tensors instead of numpy arrays.
+- Always use explicit floating-point constants when required (e.g., use `p=2.0`).
+- Avoid dynamic Python types, lambdas, or non-tensor objects that TorchScript cannot handle.
+- Any new tensor or variable you introduce must be on the same device as the input tensors.
+- Ensure that all tensor operations and functions you use are compatible with TorchScript.
+- Do not add any helper functions.
+- Do not manually expand quaternion algebra.
+- Do not create variables like w1, x1, y1, z1, rel_w, rel_x, rel_y, rel_z.
+
+GLOBAL HARD CONSTRAINTS:
+- Most importantly, the reward code's input variables must contain only attributes of the provided environment class definition (namely, variables that have prefix self.).
+- Under no circumstance can you introduce new input variables that are not attributes of the environment class.
+- If you need intermediate quantities (such as torso_position, velocity, etc.), you must compute them INSIDE the reward function from the provided attributes, instead of adding them as function inputs.
+
+Output format:
+- The output of the reward function should consist of two items:
+    (1) the total reward,
+    (2) a dictionary of each individual reward component.
+- The code output should be formatted as a python code string: ```python ... ```.
+- Do NOT output any natural language explanation or comments outside the code block.

@@ -1,0 +1,47 @@
+You are an EVOLVER whose mission is to perform evolutionary optimization on reward functions across training iterations. 
+
+After each evaluation cycle, you must select the two best-performing parent reward functions from the archive and generate a new offspring reward function by applying structured crossover and controlled mutation to their components. Your design must preserve the useful characteristics of the parents while introducing meaningful variations that may improve future performance. Ensure that all generated reward components remain TorchScript-compatible, numerically stable, physically plausible, and consistent with the environment’s state variables. Your goal is to balance inheritance and innovation, producing offspring that are both grounded in successful prior designs and capable of exploring new reward structures.
+
+For clarity, the two parent functions you will operate on are provided below:
+
+The first parent function: 
+
+```python
+{first_function}
+```
+{the_first_function_metrics}
+
+The second parent function: 
+
+```python
+{second_function}
+```
+{the_second_function_metrics}
+
+
+You have been given:
+   (1) Two parent reward functions (Parent A and Parent B).
+   (2) Their training metrics and qualitative behavior summaries.
+   (3) The task description and observations.
+   (4) The target function signature: {task_reward_signature_string}.
+
+Your job:
+   (1) Silently compare the two parents:
+      - Which terms help stability (low variance, smooth motion, fewer failures).
+      - Which terms help task performance (success rate, high returns, fast completion).
+      - Which terms are redundant, static, or harmful.
+   (2) Design ONE offspring reward by:
+      - Selecting useful components from Parent A and Parent B (crossover).
+      - Applying 1–3 small but meaningful mutations to improve behavior (e.g., weight tuning, smoothness/safety penalties, thresholds/clamps, shaping adjustments).
+
+Behavior & evolution requirements:
+   (1) Preserve the main task objective and core logic shared by the parents.
+   (2) Inherit at least one strong/working behavior component from EACH parent, unless it is clearly harmful.
+   (3) Make the offspring more stable and/or more effective than both parents by:
+   - Balancing magnitudes of components,
+   - Adding or strengthening smoothness/safety/shaping terms,
+   - Slightly adjusting weights or nonlinearities.
+   (4) Every reward component must correspond to a clear behavior (e.g., “approach goal”, “stabilize orientation”, “avoid collisions”, “move smoothly”).
+
+
+Output: Only the final PyTorch reward code, no explanations.

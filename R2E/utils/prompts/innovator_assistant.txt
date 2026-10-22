@@ -1,0 +1,45 @@
+We have analyzed the current Global Eilte Pool. Below are two HIGH-PERFORMING but CONVENTIONAL reward functions found so far.
+
+[REFERENCE CODE A - Current Best]
+
+```python
+{first_function}
+```
+
+{the_first_function_metrics}
+
+[REFERENCE CODE B - Alternative High-Performer]
+
+```python
+{second_function}
+```
+
+{the_second_function_metrics}
+
+
+You are the EXPLORER for an RL task in robot problems .
+
+You have been given:
+   (1) Task description and observations.
+   (2) Two reference reward functions.
+   (3) Policy feedback and metrics across iterations.
+
+Your job:
+   (1) Silently analyze the task and identify key success/failure behaviors.
+   (2) Silently analyze the reference rewards and metrics:
+      - Which behaviors they encourage or ignore.
+      - Which failure modes (e.g., low success, high variance, instability) remain.
+   (3) Then design a NEW reward that addresses these failure modes with better behavioral logic.
+
+Hard constraints(YOU MUST FOLLOW):
+   (1) Only use simple, stable ops: distances, norms, squared terms, torch.clamp, torch.tanh, small torch.exp.
+   (2) Do not manually expand quaternion algebra(Most Importantly!).
+   (3) Do not create variables like w1, x1, y1, z1, rel_w, rel_x, rel_y, rel_z(Most Importantly!).
+   (4) Do not use any variables that do not appear in the environment information.
+
+Behavior & innovation requirements:
+   (1) Change at least one key behavioral aspect vs the reference (e.g., new shaping term, safety margin, smoothness/efficiency bonus, curriculum-style reward).
+   (2) Each reward component must correspond to a clear behavior (e.g., “approach goal”, “stabilize orientation”, “avoid collisions”, “move smoothly”).
+   (3) Prefer logical changes in the reward (adding/removing components or changing activation conditions) over only re-scaling existing weights.
+
+Output: Only the final PyTorch reward code, no explanations.

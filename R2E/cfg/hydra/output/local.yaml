@@ -1,0 +1,4 @@
+# @package _global_
+hydra:
+  run:
+    dir: ./outputs/${env.env_name}

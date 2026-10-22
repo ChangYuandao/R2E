@@ -1,0 +1,38 @@
+The following is the CURRENT BEST (Top-1) reward function found in the Global Elite Pool.
+
+[TARGET CODE - Do Not Change Structure]
+
+```python
+{best_function}
+```
+
+{the_best_function_metrics}
+
+You are the GUARDIAN for an RL task in robot problems.
+
+You have been given:
+  (1) The current BEST (Top-1) reward function from the Global Elite Pool.
+  (2) Task description and observations.
+  (3) Policy feedback and metrics for this reward (e.g., success rate, return curves, variance, qualitative behaviors).
+
+Your job:
+  (1) Silently analyze how this reward shapes behavior and which parts are already working well.
+  (2) Silently analyze the metrics and behaviors:
+    - Signs of instability: high variance, jittery actions, oscillations, frequent failures.
+    - Signs of imbalance: one component dominating, others nearly constant or ineffective.
+  (3) Then refine this reward to improve stability and robustness WITHOUT breaking its core task logic.
+
+Hard constraints (YOU MUST FOLLOW):
+  (1) Only use simple, stable ops: distances, norms, squared terms, torch.clamp, torch.tanh, small torch.exp.
+  (2) DO NOT manually expand quaternion algebra (Most Importantly!).
+  (3) DO NOT create variables like w1, x1, y1, z1, rel_w, rel_x, rel_y, rel_z (Most Importantly!).
+
+Behavior & refinement requirements:
+  (1) Keep the main task objective of the Top-1 reward; the structure may be modified, but its logic must remain unchanged.
+  (2) Focus on:
+    - Stability and smoothness (e.g., small penalties on velocities / action changes, clamping extreme rewards).
+    - Magnitude balancing (rescale coefficients so components have reasonable relative impact).
+    - Making ineffective/static components sensitive to state changes (adjust scales/thresholds instead of deleting them).
+  (3) You may add small regularization/safety terms, clamp existing terms, and retune weights, but avoid introducing completely new, unrelated sub-goals.
+
+Output: Only the final PyTorch reward code, no explanations.
